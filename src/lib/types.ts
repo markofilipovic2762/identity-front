@@ -5,6 +5,7 @@ export type Role = {
 
 export type User = {
   id: number;
+  ad: string;
   name: string;
 };
 
@@ -32,4 +33,18 @@ export type AddUserRole = {
 export interface AddUserModalProps {
   isOpen: boolean;
   onClose: () => void;
+}
+
+export type UserAndRoleResponse= {
+  userId: number;
+  roleId: number;
+  userName: string;
+  roleName: string;
+}
+
+export type AppAndRoleResponse = {
+  appId: number;
+  roleId: number;
+  appName: string;
+  roleName: string;
 }

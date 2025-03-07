@@ -22,10 +22,10 @@ export default function ApplicationsPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Aplikacije</h1>
-        <Button onClick={() => setIsAddApplicationModalOpen(true)}>
-          Add Application
+      <div className="flex justify-normal gap-8 items-center mb-4">
+        <h1 className="text-2xl font-semibold">Aplikacije</h1>
+        <Button className="bg-green-500" onClick={() => setIsAddApplicationModalOpen(true)}>
+          Dodaj aplikaciju
         </Button>
       </div>
       <ApplicationsTable aplikacije={aplikacije} />

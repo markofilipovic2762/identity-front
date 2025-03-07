@@ -52,9 +52,11 @@ export function AssignRoleModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="text-2xl">
         <DialogHeader>
-          <DialogTitle>Dodaj autorizaciju</DialogTitle>
+          <DialogTitle className="text-3xl text-center mb-4">
+            Dodaj autorizaciju
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
@@ -63,33 +65,37 @@ export function AssignRoleModal({
             value={mbr}
             onChange={(e) => setMbr(Number(e.target.value))}
             required
+            className="text-xl"
           />
           <Select value={selectedApp} onValueChange={setSelectedApp}>
             <SelectTrigger>
-              <SelectValue placeholder="Odaberi aplikaciju" />
+              <SelectValue
+                placeholder="Odaberi aplikaciju"
+                className="text-xl"
+              />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="text-xl">
               {applications.map((app) => (
-                <SelectItem key={app.id} value={app.id.toString()}>
+                <SelectItem key={app.id} value={app.id.toString()} className="text-xl">
                   {app.name}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
-          <Select value={selectedRole} onValueChange={setSelectedRole}>
+            <Select value={selectedRole} onValueChange={setSelectedRole}>
             <SelectTrigger>
-              <SelectValue placeholder="Odaberi Rolu" />
+              <SelectValue placeholder="Odaberi Rolu" className="text-xl" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="text-xl">
               {roles.map((role) => (
-                <SelectItem key={role.id} value={role.id.toString()}>
-                  {role.name}
-                </SelectItem>
+              <SelectItem key={role.id} value={role.id.toString()} className="text-xl">
+                {role.name}
+              </SelectItem>
               ))}
             </SelectContent>
-          </Select>
-          <DialogFooter>
-            <Button type="submit">Assign Role</Button>
+            </Select>
+          <DialogFooter className="flex justify-center">
+            <Button type="submit">Dodaj</Button>
           </DialogFooter>
         </form>
       </DialogContent>

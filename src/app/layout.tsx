@@ -1,20 +1,10 @@
 "use client";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import { addLocale, locale, PrimeReactProvider } from "primereact/api";
 import { Sidebar } from "@/components/sidebar";
 import { sr } from "@/lib/sr";
 import { useEffect } from "react";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -33,15 +23,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <Navbar />
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased mt-24`}
-      >
-        <PrimeReactProvider>
+      <PrimeReactProvider>
+        <body className={`antialiased mt-24`}>
+          <Navbar />
           <Sidebar />
           <main className="ml-64 p-6 overflow-auto">{children}</main>
-        </PrimeReactProvider>
-      </body>
+        </body>
+      </PrimeReactProvider>
     </html>
   );
 }

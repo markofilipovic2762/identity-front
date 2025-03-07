@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "primereact/button";
 import { RolesTable } from "@/components/table-roles";
 import { AddRoleModal } from "@/components/add-role-modal";
 
@@ -14,9 +14,17 @@ export default function RolesPage() {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Roles</h1>
-        <Button onClick={() => setIsAddRoleModalOpen(true)}>Add Role</Button>
+      <div className="flex justify-start gap-10 items-center mb-4">
+        <h1 className="text-2xl font-semibold">Role</h1>
+        <Button
+          label="Dodaj rolu"
+          severity="success"
+          text
+          raised
+          className="text-red-400 p-2 hover:animate-bounce"
+
+          onClick={() => setIsAddRoleModalOpen(true)}
+        />
       </div>
       <RolesTable />
       <AddRoleModal

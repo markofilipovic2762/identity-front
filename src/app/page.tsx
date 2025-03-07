@@ -29,6 +29,7 @@ export default function AutorizacijaPage() {
   const assignRole = async (data: AddUserRole) => {
     const newUserRole: UserRole = await addUserRole(data);
     setAutorizacije((prev) => [...prev, newUserRole]);
+    window.location.reload();
   };
 
   return (

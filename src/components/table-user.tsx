@@ -1,44 +1,33 @@
 "use client";
-import { UserAndRoleResponse } from "@/lib/types";
+import { AppAndRoleResponse, User, UserAndRoleResponse } from "@/lib/types";
 import { Column } from "primereact/column";
 import { DataTable } from "primereact/datatable";
 
-export function AppTable({
-  aplikacijaList,
-}: {
-  aplikacijaList: UserAndRoleResponse[];
-}) {
+export function UserTable({ lista }: { lista: AppAndRoleResponse[] }) {
   return (
     <div className="card">
       <DataTable
-        value={aplikacijaList}
+        value={lista}
         paginator
         rows={5}
         rowsPerPageOptions={[5, 10, 25, 50]}
         tableStyle={{ width: "50rem" }}
         sortMode="multiple"
         selectionMode={"single"}
+        //onRowClick={(event) => }
       >
         <Column
-          field="userId"
-          header="ID"
-          style={{ width: "20%" }}
+          field="appName"
+          header="APLIKACIJA"
+          style={{ width: "50%" }}
           sortable
           filter
-          filterPlaceholder="Pretraži po id-u"
-        ></Column>
-        <Column
-          field="userName"
-          header="Naziv korisnika"
-          style={{ width: "40%" }}
-          sortable
-          filter
-          filterPlaceholder="Pretraži po korisniku"
+          filterPlaceholder="Pretraži po aplikaciji"
         ></Column>
         <Column
           field="roleName"
-          header="Rola"
-          style={{ width: "40%" }}
+          header="ROLA"
+          style={{ width: "50%" }}
           sortable
           filter
           filterPlaceholder="Pretraži po roli"

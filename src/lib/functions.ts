@@ -1,5 +1,12 @@
 import api from "./api";
-import { AddUserRole, Application, Role } from "./types";
+import {
+  AddUserRole,
+  AppAndRoleResponse,
+  Application,
+  Role,
+  User,
+  UserAndRoleResponse,
+} from "./types";
 
 export async function fetchRoles(): Promise<Role[]> {
   try {
@@ -52,5 +59,66 @@ export async function addUserRole(userRole: AddUserRole) {
     return response.data;
   } catch (error) {
     throw new Error("Error adding user role");
+  }
+}
+
+export async function getAppAuth(
+  appId: number
+): Promise<UserAndRoleResponse[]> {
+  try {
+    const response = await api.get<UserAndRoleResponse[]>(
+      `/userrole/${appId}/app`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching app roles");
+  }
+}
+
+export async function getAppById(appId: number): Promise<Application> {
+  try {
+    const response = await api.get(`/apps/${appId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching app");
+  }
+}
+
+export async function getUserById(userId: number): Promise<User> {
+  try {
+    const response = await api.get(`/users/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching user");
+  }
+}
+
+export async function getUsers(): Promise<User[]> {
+  try {
+    const response = await api.get("/users");
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching users");
+  }
+}
+
+export async function getUserAuth(id: number): Promise<AppAndRoleResponse[]> {
+  try {
+    const response = await api.get<AppAndRoleResponse[]>(
+      `/userrole/${id}/user`
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Error fetching user auth");
+  }
+}
+
+export async function removeUserAuth(id: number) {
+  try {
+    await api.delete(`/userrole/${id}`);
+    window.location.reload();
+    alert("User role removed");
+  } catch (error) {
+    throw new Error("Error removing user auth");
   }
 }

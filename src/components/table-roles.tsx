@@ -33,6 +33,7 @@ export function RolesTable() {
         rowsPerPageOptions={[5, 10, 25, 50]}
         tableStyle={{ width: "50rem" }}
         sortMode="multiple"
+        selectionMode={"single"}
       >
         <Column
           field="id"
