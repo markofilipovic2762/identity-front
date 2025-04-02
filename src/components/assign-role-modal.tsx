@@ -34,14 +34,14 @@ export function AssignRoleModal({
   roles,
   assignRole,
 }: AssignRoleModalProps) {
-  const [mbr, setMbr] = useState<number>();
+  const [mbr, setMbr] = useState<string>("");
   const [selectedApp, setSelectedApp] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     assignRole({
-      userId: mbr,
+      userId: Number(mbr),
       appId: Number(selectedApp),
       roleId: Number(selectedRole),
     });
@@ -60,10 +60,10 @@ export function AssignRoleModal({
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
-            type="text"
+            type="number"
             placeholder="MBR"
             value={mbr}
-            onChange={(e) => setMbr(Number(e.target.value))}
+            onChange={(e) => setMbr(e.target.value)}
             required
             className="text-xl"
           />
@@ -76,24 +76,32 @@ export function AssignRoleModal({
             </SelectTrigger>
             <SelectContent className="text-xl">
               {applications.map((app) => (
-                <SelectItem key={app.id} value={app.id.toString()} className="text-xl">
+                <SelectItem
+                  key={app.id}
+                  value={app.id.toString()}
+                  className="text-xl"
+                >
                   {app.name}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
-            <Select value={selectedRole} onValueChange={setSelectedRole}>
+          <Select value={selectedRole} onValueChange={setSelectedRole}>
             <SelectTrigger>
               <SelectValue placeholder="Odaberi Rolu" className="text-xl" />
             </SelectTrigger>
             <SelectContent className="text-xl">
               {roles.map((role) => (
-              <SelectItem key={role.id} value={role.id.toString()} className="text-xl">
-                {role.name}
-              </SelectItem>
+                <SelectItem
+                  key={role.id}
+                  value={role.id.toString()}
+                  className="text-xl"
+                >
+                  {role.name}
+                </SelectItem>
               ))}
             </SelectContent>
-            </Select>
+          </Select>
           <DialogFooter className="flex justify-center">
             <Button type="submit">Dodaj</Button>
           </DialogFooter>

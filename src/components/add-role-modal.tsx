@@ -11,12 +11,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
-export function AddRoleModal({ isOpen, onClose }) {
+
+
+export function AddRoleModal({ isOpen, onClose, addRole }: any) {
   const [roleName, setRoleName] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
-    //addRole(roleName);
+    addRole(roleName);
     setRoleName("");
     onClose();
   };

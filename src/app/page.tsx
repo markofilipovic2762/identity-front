@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import TableUsers from "@/components/table-autorizacija";
@@ -11,6 +10,10 @@ import {
   addUserRole,
   fetchUserRoles,
 } from "@/lib/functions";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+
+const SwalReact = withReactContent(Swal);
 
 export default function AutorizacijaPage() {
   const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
@@ -27,8 +30,19 @@ export default function AutorizacijaPage() {
   console.log(autorizacije);
 
   const assignRole = async (data: AddUserRole) => {
-    const newUserRole: UserRole = await addUserRole(data);
-    setAutorizacije((prev) => [...prev, newUserRole]);
+    const response = await addUserRole(data);
+    if (response) {
+      SwalReact.fire({
+        title: "Uspesno dodata autorizacija",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+        willClose: () => {
+          window.location.reload();
+        }
+      })
+    }
+
     window.location.reload();
   };
 

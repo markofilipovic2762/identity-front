@@ -17,9 +17,9 @@ export async function fetchRoles(): Promise<Role[]> {
   }
 }
 
-export async function addRole(role: Role) {
+export async function addRole(rola: String) {
   try {
-    const response = await api.post<Role>("/roles", role);
+    const response = await api.post("/roles", { name: rola});
     return response.data;
   } catch (error) {
     throw new Error("Error adding role");
@@ -117,7 +117,6 @@ export async function removeUserAuth(id: number) {
   try {
     await api.delete(`/userrole/${id}`);
     window.location.reload();
-    alert("User role removed");
   } catch (error) {
     throw new Error("Error removing user auth");
   }

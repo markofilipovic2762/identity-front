@@ -5,7 +5,12 @@ import { Button } from "@/components/ui/button";
 import { ApplicationsTable } from "@/components/table-apps";
 import { AddApplicationModal } from "@/components/add-application-modal";
 import { Application } from "@/lib/types";
-import { fetchApplications } from "@/lib/functions";
+import { addApplication, fetchApplications } from "@/lib/functions";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import api from "@/lib/api";
+
+const SwalReact = withReactContent(Swal);
 
 export default function ApplicationsPage() {
   const [isAddApplicationModalOpen, setIsAddApplicationModalOpen] =
@@ -16,15 +21,28 @@ export default function ApplicationsPage() {
     fetchApplications().then((data) => setAplikacije(data));
   }, []);
 
-  const addApplication = (app: Application) => {
-    setAplikacije([...aplikacije, app]);
+  const dodajAplikaciju = async (ime: string) => {
+    const response = await addApplication(ime);
+    if (response) {
+      SwalReact.fire({
+        title: "Uspesno dodata aplikacija",
+        icon: "success",
+        timer: 2000,
+        showConfirmButton: false,
+      }).then(() => {
+        window.location.reload();
+      });
+    }
   };
 
   return (
     <div>
       <div className="flex justify-normal gap-8 items-center mb-4">
         <h1 className="text-2xl font-semibold">Aplikacije</h1>
-        <Button className="bg-green-500" onClick={() => setIsAddApplicationModalOpen(true)}>
+        <Button
+          className="ml-4 bg-gray-600 border-2 border-transparent hover:border-red-400 shadow-black shadow-md p-4 text-xl"
+          onClick={() => setIsAddApplicationModalOpen(true)}
+        >
           Dodaj aplikaciju
         </Button>
       </div>
@@ -32,7 +50,7 @@ export default function ApplicationsPage() {
       <AddApplicationModal
         isOpen={isAddApplicationModalOpen}
         onClose={() => setIsAddApplicationModalOpen(false)}
-        addApplication={addApplication}
+        addApplication={dodajAplikaciju}
       />
     </div>
   );

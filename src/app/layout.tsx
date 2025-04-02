@@ -16,10 +16,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    addLocale("sr", sr);
-    locale("sr");
-  }, []);
+  // useEffect(() => {
+  //   addLocale("sr", sr);
+  //   locale("sr");
+  // }, []);
 
   return (
     <html lang="en">
